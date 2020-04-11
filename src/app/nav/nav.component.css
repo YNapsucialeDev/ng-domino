@@ -1,0 +1,62 @@
+.sidenav-container 
+{
+	height: 100%;
+}
+
+.sidenav 
+{
+	width: 200px;
+}
+
+.sidenav .mat-toolbar 
+{
+	background: inherit;
+}
+
+.mat-toolbar.mat-primary 
+{
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
+.content-container
+{
+	padding: 15px;
+}
+
+/*Clase que indica el acomodo del sidebar*/
+.spacer 
+{
+  flex: 1 1 auto;
+}
+
+.rasa 
+{
+	background-color: #3f51b5!important;
+	color: white;
+}
+
+.menu-open
+{
+	width: 200px!important;
+	transition: width .4s;
+}
+
+.menu-close 
+{
+	width: 0px!important;
+	transition: width .4s;
+}
+
+.content-margin-close 
+{
+	margin-left: 0px !important;
+	transition: 0.4s;
+}
+
+.content-margin-open 
+{
+	margin-left: 200px!important;
+	transition: 0.4s;
+}

@@ -1,0 +1,50 @@
+<app-nav>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h5>Bienvenido {{player}} con ID: {{socketID}}</h5>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-4 offset-md-4">
+            <label>Personas conectadas</label>
+            <br>    
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let player of players">{{player.player}}</mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-3">
+            <mat-card>
+                <mat-card-header >
+                    <h5>Chat de juego</h5>
+                </mat-card-header>
+                <mat-card-content class="chat-card">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <mat-list role="list">
+                                <mat-list-item role="listitem" *ngFor="let msg of messages">{{msg.user}}: {{msg.message}}</mat-list-item>
+                            </mat-list>
+                        </div>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="full_width">
+                                <input matInput placeholder="Escriba su mensaje..." [formControl]="mensaje" (keyup)="validarForm($event.keyCode)">
+                                <mat-error *ngIf="mensaje.invalid && mensaje.dirty">El mensaje no puede ir vacío</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button mat-raised-button class="full_width" color="primary" [disabled]="!formValid" (click)="enviarMensaje()">ENVIAR</button>
+                        </div>
+                    </div>
+                    <br>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</app-nav>

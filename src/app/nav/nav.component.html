@@ -1,0 +1,30 @@
+<mat-sidenav-container class="sidenav-container">
+	<mat-sidenav #drawer class="sidenav" fixedInViewport
+				[ngClass]="isMenuClose ? 'menu-close': 'menu-open'"
+				mode="side"
+				opened="true">
+		<mat-toolbar class="rasa">Menú</mat-toolbar>
+		<mat-nav-list>
+			<a mat-list-item (click)="goToRoom()">Salas</a>
+			<a mat-list-item (click)="cerrarSesion()">Cerrar Sesión</a>
+		</mat-nav-list>
+	</mat-sidenav>
+	<mat-sidenav-content [ngClass]="isMenuClose ? 'content-margin-close' : 'content-margin-open'">
+		<mat-toolbar class="rasa">
+			<button aria-label="Toggle sidenav" 
+					mat-icon-button 
+					disableRipple="true" 
+					(click)="onToolbarMenuToogle()">
+				<mat-icon class="bold burguer">menu</mat-icon>
+			</button>
+			<span class="spacer"></span>
+			<span>Bienvenido al Napsu Dominó</span>
+			<span class="spacer"></span>
+			<span>{{player}}</span>
+		</mat-toolbar>
+		<!-- Add Content Here -->
+		<div class="content-container">
+			<ng-content></ng-content>
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>

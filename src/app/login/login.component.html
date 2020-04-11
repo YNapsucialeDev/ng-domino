@@ -1,0 +1,47 @@
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <mat-card>
+            <mat-card-title>
+                <h5>Inicio de sesión</h5>
+            </mat-card-title>
+            <mat-card-content>
+                <form [formGroup]="login_form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="full_width">
+                                <input matInput placeholder="Nombre de usuario" [formControl]="usuario" (keyup)="validar_form()">
+                            </mat-form-field>
+                            <mat-error *ngIf="usuario.invalid && usuario.dirty">El usuario es requerido</mat-error>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="full_width">
+                                <input matInput placeholder="Contraseña" type="password" [formControl]="contrasena" (keyup)="validar_form($event.keyCode)">
+                            </mat-form-field>
+                            <mat-error *ngIf="contrasena.invalid && contrasena.dirty">La contraseña es requerido</mat-error>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <button mat-raised-button color="primary" [disabled]="!form_valid" (click)="login()">INICIAR SESIÓN</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row text-center" *ngIf="login_error == true">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning">
+                            El usuario o la contraseña son incorrectas
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
