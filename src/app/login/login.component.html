@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <mat-form-field class="full_width">
-                                <input matInput placeholder="Nombre de usuario" [formControl]="usuario" (keyup)="validar_form()">
+                                <input matInput placeholder="Nombre de usuario" [formControl]="usuario" (keyup)="validar_form($event.keyCode)">
                             </mat-form-field>
                             <mat-error *ngIf="usuario.invalid && usuario.dirty">El usuario es requerido</mat-error>
                         </div>
