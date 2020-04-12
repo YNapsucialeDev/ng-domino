@@ -8,31 +8,31 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RoomComponent } from './room/room.component';
 import { LoginComponent } from './login/login.component';
+import { NavComponent } from './nav/nav.component';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
-
 //EXTERNAL DEPENDENCIES
-import { MatCardModule,
-		MatFormFieldModule,
-		MatInputModule,
-		MatButtonModule,
-		MatDialogModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-
-
-//SERVICES
-import { SocketService } from './socket.service';
-import { NavComponent } from './nav/nav.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
+
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HomeComponent,
-		RoomComponent,
 		LoginComponent,
-		NavComponent
+		NavComponent,
+		RoomComponent
 	],
 	imports: [
 		BrowserModule,
@@ -53,7 +53,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 		MatListModule
 	],
 	providers: [
-		SocketService
+		
 	],
 	bootstrap: [
 		AppComponent

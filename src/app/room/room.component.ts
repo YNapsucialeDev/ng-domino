@@ -1,15 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { FormControl, Validators } from '@angular/forms';
 
 import * as THREE from 'three';
+import { DoubleSide } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.scss']
 })
-export class RoomComponent implements OnInit, OnDestroy
+export class RoomComponent implements OnInit, AfterViewInit
 {
     public socketID: string = '';
     public player: string = '';
@@ -19,6 +21,10 @@ export class RoomComponent implements OnInit, OnDestroy
 
     //message form control
     public mensaje: FormControl = new FormControl('', Validators.required);
+
+
+    //THREE JS  
+    @ViewChild('tjsContainer') rendererContainer: ElementRef;
     
     constructor(private socket: Socket) 
     {
@@ -67,36 +73,59 @@ export class RoomComponent implements OnInit, OnDestroy
                 alert('EL JUEGO EMPIEZA EN 5 SEGUNDOS');  
             }
         });
+    }
 
+    public controls: any;
+
+    ngAfterViewInit()
+    {
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+        
 
-        var renderer = new THREE.WebGLRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( renderer.domElement );
+        var renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize( this.rendererContainer.nativeElement.offsetWidth * 0.98, this.rendererContainer.nativeElement.offsetHeight * 1.37 );
+        this.rendererContainer.nativeElement.appendChild(renderer.domElement);
+        let controls = new OrbitControls(camera, this.rendererContainer.nativeElement); 
 
-        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        var cube = new THREE.Mesh( geometry, material );
+        var materials = [
+            new THREE.MeshBasicMaterial({
+                map: new THREE.TextureLoader().load('../../assets/onefourside.PNG'),
+                side: DoubleSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: new THREE.TextureLoader().load('../../assets/onefourside.PNG'),
+                side: DoubleSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: new THREE.TextureLoader().load('../../assets/onefourside.PNG'),
+                side: DoubleSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: new THREE.TextureLoader().load('../../assets/onefourside.PNG'),
+                side: DoubleSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: new THREE.TextureLoader().load('../../assets/onefour.PNG'),
+                side: DoubleSide
+            }),
+            new THREE.MeshBasicMaterial({
+                map: new THREE.TextureLoader().load('../../assets/onefourside.PNG'),
+                side: DoubleSide
+            }),
+        ];
+        var cube = new THREE.Mesh( new THREE.BoxGeometry( 1, 2, 0.25, 1, 1, 1 ), materials );
         scene.add( cube );
 
         camera.position.z = 5;
 
         var animate = function () {
             requestAnimationFrame( animate );
-
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
-
+            controls.update();
             renderer.render( scene, camera );
         };
 
         animate();
-    }
-
-    ngOnDestroy()
-    {
-        
     }
 
     public validarForm(eventKey: number): void
